@@ -1,0 +1,70 @@
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "pos_filter": {
+          "type": "kuromoji_part_of_speech",
+          "stoptags": [
+            "助詞-格助詞-一般",
+            "助詞-終助詞"
+          ]
+        },
+        "greek_lowercase_filter": {
+          "type": "lowercase",
+          "language": "greek"
+        }
+      },
+      "tokenizer": {
+        "kuromoji": {
+          "type": "kuromoji_tokenizer"
+        },
+        "ngram_tokenizer": {
+          "type": "nGram",
+          "min_gram": "2",
+          "max_gram": "3",
+          "token_chars": [
+            "letter",
+            "digit"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "Patient": {
+      "properties": {
+        "patient_id": {
+          "type": "integer"
+        },
+        "Subject": {
+          "type": "string",
+          "analyzer": "ngram_analyzer"
+        },
+        "Object": {
+          "type": "string",
+          "analyzer": "ngram_analyzer"
+        },
+        "Assesment": {
+          "type": "string",
+          "analyzer": "ngram_analyzer"
+        },
+        "Plan": {
+          "type": "string",
+          "analyzer": "ngram_analyzer"
+        },
+        "Age": {
+          "type": "integer"
+        },
+        "Sex": {
+          "type": "integer"
+        },
+        "Time": {
+          "type": "integer"
+        },
+        "change_point": {
+          "type": "integer"
+        }
+      }
+    } 
+  }
+}

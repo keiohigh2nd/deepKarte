@@ -2,12 +2,22 @@
   "settings": {
     "analysis": {
       "filter": {
+        "pos_filter": {
+          "type": "kuromoji_part_of_speech",
+          "stoptags": [
+            "助詞-格助詞-一般",
+            "助詞-終助詞"
+          ]
+        },
         "greek_lowercase_filter": {
           "type": "lowercase",
           "language": "greek"
         }
       },
       "tokenizer": {
+        "kuromoji": {
+          "type": "kuromoji_tokenizer"
+        },
         "ngram_tokenizer": {
           "type": "nGram",
           "min_gram": "2",
@@ -19,6 +29,16 @@
         }
       },
       "analyzer": {
+        "kuromoji_analyzer": {
+          "type": "custom",
+          "tokenizer": "kuromoji_tokenizer",
+          "filter": [
+            "kuromoji_baseform",
+            "pos_filter",
+            "greek_lowercase_filter",
+            "cjk_width"
+          ]
+        },
         "ngram_analyzer": {
           "tokenizer": "ngram_tokenizer"
         }
@@ -32,7 +52,7 @@
       },
       "_all": {
         "enabled": true,
-        "analyzer": "ngram_analyzer"
+        "analyzer": "kuromoji_analyzer"
       },
       "properties": {
         "id": {
@@ -47,7 +67,7 @@
         "Department": {
           "type": "string",
           "index": "analyzed",
-          "analyzer": "ngram_analyzer"
+          "analyzer": "kuromoji_analyzer"
         }
       }
     },
@@ -57,7 +77,7 @@
       },
       "_all": {
         "enabled": true,
-        "analyzer": "ngram_analyzer"
+        "analyzer": "kuromoji_analyzer"
       },
       "_parent": {
         "type": "Patient"
@@ -70,22 +90,22 @@
 	"Subject": {
           "type": "string",
           "index": "analyzed",
-          "analyzer": "ngram_analyzer"
+          "analyzer": "kuromoji_analyzer"
 	},
 	"Object": {
           "type": "string",
           "index": "analyzed",
-          "analyzer": "ngram_analyzer"
+          "analyzer": "kuromoji_analyzer"
 	},
 	"History": {
           "type": "string",
           "index": "analyzed",
-          "analyzer": "ngram_analyzer"
+          "analyzer": "kuromoji_analyzer"
 	},
         "A/P": {
           "type": "string",
           "index": "analyzed",
-          "analyzer": "ngram_analyzer"
+          "analyzer": "kuromoji_analyzer"
         }
       }
     }

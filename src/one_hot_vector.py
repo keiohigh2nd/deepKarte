@@ -97,4 +97,4 @@ if __name__ == "__main__":
 		mat = neighbor_matrix(arr_text, index_corpus)
 		sm_tensor.append(mat)
 	np.save('processed_data/Neighbor_mat.npy', sm_tensor)
-	print sm_tensor
+	tmp = np.load('processed_data/Neighbor_mat.npy')

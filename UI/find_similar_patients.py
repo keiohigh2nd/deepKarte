@@ -16,13 +16,21 @@ class Example(QtGui.QMainWindow):
     def initUI(self):      
 
 	btn = QtGui.QPushButton("Find", self)
-        btn.move(50, 50)
+        btn.move(5, 50)
         btn.clicked.connect(self.buttonClicked)
+
+	btn1 = QtGui.QPushButton("Stat", self)
+        btn1.move(100, 50)
+        btn1.clicked.connect(self.buttonClicked)
+
+	btn2 = QtGui.QPushButton("Treatment", self)
+        btn2.move(195, 50)
+        btn2.clicked.connect(self.buttonClicked)
       
 	self.lbl = QtGui.QLabel(self)
         self.statusBar()
         
-        self.setGeometry(300, 300, 290, 150)
+        self.setGeometry(200, 160, 300, 100)
         self.setWindowTitle('Alpha Karte')
         self.show()
         

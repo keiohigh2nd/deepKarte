@@ -1,0 +1,97 @@
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "greek_lowercase_filter": {
+          "type": "lowercase",
+          "language": "greek"
+        }
+      },
+      "tokenizer": {
+        "ngram_tokenizer": {
+          "type": "nGram",
+          "min_gram": "2",
+          "max_gram": "3",
+          "token_chars": [
+            "letter",
+            "digit"
+          ]
+        }
+      },
+      "analyzer": {
+        "ngram_analyzer": {
+          "tokenizer": "ngram_tokenizer"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "Patient": {
+      "_source": {
+        "enabled": true
+      },
+      "_all": {
+        "enabled": true,
+        "analyzer": "ngram_analyzer"
+      },
+      "properties": {
+        "id": {
+          "type": "integer",
+          "index": "not_analyzed"
+        },
+        "Object": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ngram_analyzer"
+        },
+        "Department": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ngram_analyzer"
+        }
+      }
+    },
+    "karte": {
+      "_source": {
+        "enabled": true
+      },
+      "_all": {
+        "enabled": true,
+        "analyzer": "ngram_analyzer"
+      },
+      "_parent": {
+        "type": "Patient"
+      },
+      "properties": {
+        "id": {
+          "type": "integer",
+          "index": "not_analyzed"
+        },
+	"time": {
+          "type": "integer",
+          "index": "not_analyzed"
+        },
+	"Subject": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ngram_analyzer"
+	},
+	"Object": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ngram_analyzer"
+	},
+	"History": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ngram_analyzer"
+	},
+        "A/P": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ngram_analyzer"
+        }
+      }
+    }
+  }
+}

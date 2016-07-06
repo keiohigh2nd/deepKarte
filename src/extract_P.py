@@ -106,6 +106,7 @@ def show_noun(pid):
                 if tmp[0] == u'名詞':
                         noun_box.append(tmp[6])
                 res = res.next
+	#view以下のCSVに書き込みたいなら、ここで書き込め
 	return noun_box
 
 if __name__ == "__main__":

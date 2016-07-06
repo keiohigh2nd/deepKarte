@@ -29,7 +29,6 @@ def find_P(text, index_corpus, file, m):
 	P_list = []
 	for word in arr:
 		if int(word.find("#")) != -1:
-			print word
 			fw.write(word)
 			fw.write(",")
 			tmp = one_hot_vector.parse_text(word, m)
@@ -46,35 +45,70 @@ def vectorlize_Plist(patient_plist):
         index = vectorizer.get_feature_names()
         return X.toarray(), index		
 
-def find_similar_patients(matrix, query):
+def find_similar_patients(matrix, query_id):
 	sim_patients = []
+	counter = 0
 	for row_id in xrange(len(matrix)):
 		#類似患者の定義
-		tmp_dist = matrix[query] - matrix[row_id]
+		tmp_dist = matrix[query_id] - matrix[row_id]
 		tmp = np.power(tmp_dist, 2).sum()
 		if tmp < 2:
 			sim_patients.append(row_id)
 	return sim_patients
 
-def find_coexist_words(similar_patients):
+def find_coexist_words(similar_patients_list):
 	vec_corpus = np.load('processed_data/AP_patient.npy')
 	r,c  = len(vec_corpus), len(vec_corpus[0])
 	arr = np.zeros((1,c), dtype=np.int)
-	for sim in similar_patients:
-		arr = vec_corpus[sim] + arr
-	print arr
 
+	for pid in similar_patients_list:
+		arr = vec_corpus[int(pid)] + arr
+	#   word index .... 
+	#Pid
+	#.
+	#.
+	#上からどんどんん[0,0,1...]というのに[0,0,1...]というのを足してる
 	N = 20
 	max_N_list = []
+	print arr
 	for i in xrange(N):
 		tmp = np.argmax(arr)
 		max_N_list.append(tmp)
+		#上位が確定したものは0にしておく
 		arr[0][tmp] = 0	 
 	return max_N_list
 
-if __name__ == "__main__":
-        #count, index = load_sample()
+def show_noun(pid):
+	f = codecs.open("processed_data/word_index.txt","r","utf-8")
+        index_corpus = f.read().split(",")
+        f.close()
 
+	fp = codecs.open("processed_data/similar_plist.txt","r","utf-8")
+	plist = fp.read().split("\n")
+	fp.close()
+
+	similar_patients_id = plist[pid].split(",")
+	del similar_patients_id[-1]
+
+	max_N_list = find_coexist_words(similar_patients_id)
+        max_N_words = []
+        tmp = ""
+        for i in max_N_list:
+                max_N_words.append(index_corpus[i])
+                tmp += index_corpus[i]
+
+	m = MeCab.Tagger ("-Owakati")
+        encode_text = tmp.encode('utf-8')
+        res = m.parseToNode(encode_text)
+        noun_box = []
+        while res:
+                tmp = res.feature.decode('utf-8').split(",")
+                if tmp[0] == u'名詞':
+                        noun_box.append(tmp[6])
+                res = res.next
+	return noun_box
+
+if __name__ == "__main__":
 	p_text, p_json = read_json("output/one_json_time_series_patient.json")
 
         #Unidentified two spaces
@@ -84,6 +118,7 @@ if __name__ == "__main__":
 	m = MeCab.Tagger ("-Owakati")
 	#m = MeCab.Tagger ("-Ochasen")
 
+	#Indexの読み込み
 	f = codecs.open("processed_data/word_index.txt","r","utf-8")	
 	index_corpus = f.read().split(",")
 	f.close()
@@ -98,22 +133,30 @@ if __name__ == "__main__":
 		fw.write("\n")
 	fw.close()
 
-
 	plist_mat, plist_index =  vectorlize_Plist(patient_plist)
-	#4番目の患者に類似する患者群を集める
-	similar_patients = find_similar_patients(plist_mat, 4)
 
+	#類似患者集団を抽出しcsvに入れ込む
+	#ここ以外で使えるIDと行列は、患者のIndexと類似する患者集団のINDEX
+	sim_list = []
+	f = codecs.open("processed_data/similar_plist.txt","w","utf-8")
+	for i in xrange(num_patients):
+		similar_patients_id = find_similar_patients(plist_mat, i)
+		print "Number of similar patient is %s"%len(similar_patients_id)
+		f.write(str(i))
+		f.write(',')
+		for j in similar_patients_id:
+			f.write(str(j))
+			f.write(',')
+		f.write('\n')
+	f.close()
+
+
+
+	#病名が類似している類似患者は先に割り出しておく
 	#共起単語の発見
-	max_N_list = find_coexist_words(similar_patients)
-	max_N_words = []
-	tmp = ""
-	for i in max_N_list:
-		max_N_words.append(index_corpus[i])
-		tmp += index_corpus[i]
+	#similar_patients_idはcsvで開けて、index_corpusも開ける
+	
+	p_id = 1
+	noun_box = show_noun(p_id)
 
-	print tmp
-	encode_text = tmp.encode('utf-8')
-        res = m.parseToNode(encode_text)
-	while res:
-        	print res.feature.decode('utf-8')
-		res = res.next
+

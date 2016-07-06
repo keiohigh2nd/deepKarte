@@ -4,7 +4,7 @@
 import sys
 from PyQt4 import QtGui, QtCore
 sys.path.append('src')
-import select_similar
+import select_similar, extract_P
 
 class Example(QtGui.QMainWindow):
     
@@ -29,13 +29,20 @@ class Example(QtGui.QMainWindow):
     def buttonClicked(self, text):
 	text, ok = QtGui.QInputDialog.getText(self, 'Input Dialog', 'Enter Patient Id')
 	#In this function, you can pass text from str(text)
-	pid = select_similar.find_similar_patient(text)
-	self.statusBar().showMessage(pid + ' is Similar')
+	#類似患者検索アルゴリズムの2つ
+	#近傍行列に基づくもの
+	#similar_pid = select_similar.find_similar_patient(text)
 
-	#self.lbl.move(10, 10)
+	#病名とBoGを利用した共起表現の所
+	p_index = select_similar.return_patient_index(text)
+	extract_P.show_noun(p_index)
+	#self.statusBar().showMessage(similar_pid + ' is Similar')
+
+	self.lbl.move(10, 10)
         #self.lbl.setText('<a href="http://0.0.0.0:5601/app/kibana#/doc/test/test/karte?id=%s">Stackoverflow/</a>'%pid)
-        #self.lbl.setOpenExternalLinks(True)
-	return str(text)
+        self.lbl.setText('<a href="file:///Users/keiohigh2nd/deepKarte/view/donut.html">Stackoverflow/</a>')
+        self.lbl.setOpenExternalLinks(True)
+
 
 def main():
     

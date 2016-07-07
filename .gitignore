@@ -5,6 +5,9 @@ view/*
 !index.html
 !tree.html
 !app.js
+!parallelCoordinatesChart*
+!sunburst.html
+!cumulativeLineChart*
 dic_output
 .DS_Store
 .git

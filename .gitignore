@@ -8,6 +8,7 @@ view/*
 !parallelCoordinatesChart*
 !sunburst.html
 !cumulativeLineChart*
+!bulk_data.py
 dic_output
 .DS_Store
 .git

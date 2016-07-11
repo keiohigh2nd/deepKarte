@@ -1,16 +1,20 @@
 #coding:utf-8
-import json
+import json, sys
 
-f = open('view/cumu.json', 'r')
+json_file = sys.argv[1]
+space_html = sys.argv[2]
+result_html = sys.argv[3]
+
+f = open(json_file, 'r')
 texts = f.read()
 f.close()
 
-fh = open('view/space_cumulativeLineChart.html', 'r')
+fh = open(space_html, 'r')
 html = fh.readlines()
 fh.close()
 
 
-fo = open('view/done_cumulativeLineChart.html', 'w')
+fo = open(result_html, 'w')
 i,j = 0,0
 N = len(html)
 

@@ -38,7 +38,6 @@ def find_similar_patient(p_id):
 	return return_patient_ID(min_id)
 
 if __name__ == "__main__":
-        #自分が検索されてしまう問題
 	patient_id = "quVWwJbugJYxynem"
 	ind = find_similar_patient(patient_id)
 	print ind

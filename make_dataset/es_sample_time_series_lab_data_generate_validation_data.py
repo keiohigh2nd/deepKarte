@@ -99,6 +99,12 @@ def randomPatient(p_id, f, i_name):
 	Assesment = ""
 	Plan = ""
 
+	BP = random.randint(80,150)
+	WBC = random.randint(3500,9000)
+	CRP = random.randint(1,10)
+	HR = random.randint(50,90)
+	BS = random.randint(70,130)
+
         for t in xrange(Time_points):
 		random_int = random.randint(3,5)
         	Subject += randomText(3, S_words)
@@ -106,6 +112,12 @@ def randomPatient(p_id, f, i_name):
         	noise = randomText(random_int + 2 , AP_words)
 		Assesment += "#%s " % randomText(1 , A_words)
 		Plan += randomText(2 , P_words)
+
+		BP += random.randint(-20,20)
+        	WBC += random.randint(-1000,1000)
+        	CRP += random.randint(-1, -1)
+        	HR += random.randint(-10,10)
+        	BS += random.randint(-10,10)
 
 		if int(t) == int(change_id):
 			tmp_Triage = randomText(random_int + 10, History_words)
@@ -128,13 +140,18 @@ def randomPatient(p_id, f, i_name):
 				"Age" : age_tmp,
 				"Sex" : sex_tmp,
 				"Time" : t,
-				"change_point" : change_id
+				"change_point" : change_id,
+				"BP" : BP,
+				"WBC" : WBC,
+				"CRP" : CRP,
+				"HR" : HR,
+				"BS" : BS
 			}
 		p_dict[t] = t_dict
 
 		f.write("{ \"index\": { \"_index\": \"%s\", \"_type\":  \"karte\", \"_parent\": \"%s\" } }"%(i_name, p_id))
 		f.write("\n")
-		f.write("{ \"id\": \"%s\", \"time\": \"%s\", \"Subject\": \"%s\", \"Object\": \"%s\", \"History\": \"%s\", \"A/P\": \"%s\" }"%(p_id, t, Subject, Object, tmp_Triage,  Assesment + word_list))
+		f.write("{ \"id\": \"%s\", \"time\": \"%s\", \"Subject\": \"%s\", \"Object\": \"%s\", \"History\": \"%s\", \"A/P\": \"%s\", \"BP\": \"%s\",\"WBC\": \"%s\",\"CRP\": \"%s\",\"HR\": \"%s\", \"BS\": \"%s\" }"%(p_id, t, Subject, Object, tmp_Triage,  Assesment + word_list, BP, WBC, CRP, HR, BS))
 		#f.write("{ \"id\": \"%s\", \"Subject\": \"%s\", \"Object\": \"%s\", \"History\": \"%s\", \"A/P\": \"%s\" }"%(p_id, Subject, Object, tmp_Triage,  word_list))
 		f.write("\n")
 
@@ -161,7 +178,7 @@ if __name__ == "__main__":
 
     pat_dics = {}
     p_labels = {}
-    f = codecs.open("elastic_search/multi_es_sample_karte.txt","w","utf-8")
+    f = codecs.open("elastic_search/multi_lab_es_sample_karte.txt","w","utf-8")
 
     index_name = sys.argv[2]
     for t in xrange(n):
@@ -173,7 +190,7 @@ if __name__ == "__main__":
     jsonstring = json.dumps(pat_dics, ensure_ascii=False)
     label_jsonstring = json.dumps(p_labels, ensure_ascii=False)
 
-    fa = codecs.open("output/json_multi_time_series_patient.json","w","utf-8")
+    fa = codecs.open("output/json_multi_lab_time_series_patient.json","w","utf-8")
     f_label = codecs.open("output/p_labels.json","w","utf-8")
     json.dump(pat_dics, fa, ensure_ascii=False)
     json.dump(p_labels, f_label, ensure_ascii=False)

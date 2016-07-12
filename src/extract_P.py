@@ -25,14 +25,16 @@ def vec(arr):
 	return X.toarray(), index
 
 def find_P(text, index_corpus, file, m):
+	#APの病名だけを抽出して分かち書きしてくれる関数
 	arr = text.split(" ")
 	P_list = []
 	for word in arr:
+		print "----"
 		if int(word.find("#")) != -1:
 			fw.write(word)
 			fw.write(",")
 			tmp = one_hot_vector.parse_text(word, m)
-			#P_list.append(tmp)
+			P_list.append(tmp)
 			#病気名をベクトル化するかはまた別に考えよう
 	return tmp
 
@@ -110,7 +112,9 @@ def show_noun(pid):
 	return noun_box
 
 if __name__ == "__main__":
-	p_text, p_json = read_json("output/one_json_time_series_patient.json")
+	#p_text, p_json = read_json("output/one_json_time_series_patient.json")
+	p_text, p_json = read_json("output/json_multi_lab_time_series_patient.json")
+
 
         #Unidentified two spaces
         num_patients = len(p_json)
@@ -124,6 +128,7 @@ if __name__ == "__main__":
 	index_corpus = f.read().split(",")
 	f.close()
 
+	#類次患者を#Pで絞る. ID - #P
 	patient_plist = []
 	fw = codecs.open("processed_data/patinet_plist.txt","w","utf-8")
 	for i in xrange(num_patients):
@@ -134,10 +139,16 @@ if __name__ == "__main__":
 		fw.write("\n")
 	fw.close()
 
-	plist_mat, plist_index =  vectorlize_Plist(patient_plist)
 
-	#類似患者集団を抽出しcsvに入れ込む
-	#ここ以外で使えるIDと行列は、患者のIndexと類似する患者集団のINDEX
+	#病気だけの特別辞書
+	# plist_mat 
+	#		急 腎臓　肝臓
+	# patient index 0   1     1
+	plist_mat, plist_index =  vectorlize_Plist(patient_plist)
+	
+
+	#類似患者集団を抽出しcsvに入れ込む。ここ以外で使えるIDと行列は、患者のIndexと類似する患者集団のINDEX
+	#ここの機能は確認済み
 	sim_list = []
 	f = codecs.open("processed_data/similar_plist.txt","w","utf-8")
 	for i in xrange(num_patients):
@@ -151,13 +162,11 @@ if __name__ == "__main__":
 		f.write('\n')
 	f.close()
 
-
-
 	#病名が類似している類似患者は先に割り出しておく
 	#共起単語の発見
 	#similar_patients_idはcsvで開けて、index_corpusも開ける
 	
+	"""
 	p_id = 1
 	noun_box = show_noun(p_id)
-
-
+	"""

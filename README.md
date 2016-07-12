@@ -14,9 +14,14 @@ Generate medical records for evaluating patient similarity
 ##CI
 
 
+##For View  
+
+ex)  python view/bulk_data_for_parallelcordinates.py output/d_lab.json view/space_parallelCoordinates.html view/done_parallelCoordinates.html   
+
 
 #Simple Patient History View  
 1st step:  
+	These codes generate different dataset.
 	Generate Patinets -> python src/json_time_series_generate_patients.py n  
 	n - number of patinets  
 

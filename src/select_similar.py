@@ -19,7 +19,8 @@ def calc_dist(a, b):
 	mat = np.fabs(tmp_Matrix)
 	return mat.sum()
 
-def find_similar_patient(p_id):
+def find_similar_patient_byID(p_id):
+	#This is for patient ID
 	p_text, p_json = one_hot_vector.read_json("output/one_json_time_series_patient.json")
 	p_index = return_patient_index(p_id)
 
@@ -35,9 +36,42 @@ def find_similar_patient(p_id):
 		if int(min_value) > int(tmp_min):
 			min_value = tmp_min
 			min_id = i
+	print min_id
 	return return_patient_ID(min_id)
 
+def find_similar_patient_byPlist(pid, plist):
+        #This is for patient ID
+
+        with open("processed_data/Neighbor_mat.npy", "rb") as npy:
+                tmp_m = np.load(npy)
+
+        min_value = 100000
+        min_id = 0
+        for i in plist:
+                tmp_min = calc_dist(tmp_m[int(i)], tmp_m[int(pid)])
+                if int(min_value) > int(tmp_min):
+                        min_value = tmp_min
+                        min_id = i
+        return min_id
+
+
+def find_similar_from_p(pid):
+	f = open('processed_data/similar_plist.txt')
+	lines = f.readlines()
+	f.close()
+
+	tmp = lines[pid].split(",")
+	del tmp[0]
+	return tmp
+
 if __name__ == "__main__":
+	#Patient list from #Problem list
+	pid = 20
+	plist = find_similar_from_p(pid)
+	del plist[0]
+	del plist[-1]
+
 	patient_id = "quVWwJbugJYxynem"
-	ind = find_similar_patient(patient_id)
-	print ind
+	print plist
+	print find_similar_patient_byPlist(pid, plist)
+	

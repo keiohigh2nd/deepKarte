@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-import one_hot_vector
+import in_out
 
 def return_patient_index(p_id):
-	p_text, p_json = one_hot_vector.read_json("output/one_json_time_series_patient.json")
+	p_text, p_json = in_out.read_json("output/one_json_time_series_patient.json")
 	for i in xrange(len(p_json)):
 		if p_id == p_json["%s"%i]["0"]["patient_id"]:
 			return i
 
 def return_patient_ID(p_index):
-	p_text, p_json = one_hot_vector.read_json("output/one_json_time_series_patient.json")
+	p_text, p_json = in_out.read_json("output/one_json_time_series_patient.json")
 	return p_json["%s"%p_index]["0"]["patient_id"]
 	
 def calc_dist(a, b):
@@ -21,7 +21,7 @@ def calc_dist(a, b):
 
 def find_similar_patient_byID(p_id):
 	#This is for patient ID
-	p_text, p_json = one_hot_vector.read_json("output/one_json_time_series_patient.json")
+	p_text, p_json = in_out.read_json("output/one_json_time_series_patient.json")
 	p_index = return_patient_index(p_id)
 
 	with open("processed_data/Neighbor_mat.npy", "rb") as npy:

@@ -21,30 +21,8 @@ def dictionarize_text(arr):
 	#Need preprocessing of texts
         cl = collections.Counter(arr)
 	from sklearn.feature_extraction import DictVectorizer
-	v = DictVectorizer()
-	count = v.fit_transform(cl)
-        index = v.get_feature_names()
-        return count, index
-
-def get_cov(text, index):
-	s_matrix = np.zeros((len(index), len(index)))
-	for i_tex in xrange(len(text)):
-          i = get_index(text[i_tex], index)
-          if i_tex > 0:
-              m1 = get_index(text[i_tex-1], index)
-              s_matrix[i][m1] += 1
-          if i_tex < len(text)-1:
-              m2 = get_index(text[i_tex+1], index)
-              s_matrix[i][m2] += 1
-        return s_matrix
-
-
-def load_sample():
-        c = ['a', 'b', 'a', 'd', 'a']
-        count, index = dictionarize_text(c)
-	sm = get_cov(c, index)
-        print c
-        print sm
+	dictionarize_text(cl)
+	sm = get_cov(cl, index)
         return count, index
 
 if __name__ == "__main__":
@@ -54,6 +32,7 @@ if __name__ == "__main__":
 
         #Unidentified two spaces
         texts = p_json["0"]["3"]["Plan"].split("  ")
+	print texts
 	count_m, index = dictionarize_text(texts)
 
 	sm = get_cov(texts, index)

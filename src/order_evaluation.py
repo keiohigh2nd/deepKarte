@@ -3,13 +3,7 @@ import json, random
 import detection
 import collections
 import numpy as np
-
-def read_json(filename):
-        f = open(filename, 'r')
-        jsonData = json.load(f,"utf-8")
-        text = json.dumps(jsonData)
-        f.close()
-        return text, jsonData
+import in_out
 
 def get_index(word, index):
         i = 0
@@ -96,7 +90,7 @@ def find_similar_label(arr):
 if __name__ == "__main__":
         #count, index = load_sample()
 
-	p_text, p_json = read_json("output/one_json_time_series_patient.json")
+	p_text, p_json = in_out.read_json("output/one_json_time_series_patient.json")
 
         #Unidentified two spaces
         num_patients = len(p_json)

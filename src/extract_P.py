@@ -3,26 +3,7 @@ import json, random, MeCab
 import detection, codecs, math
 import collections
 import numpy as np
-import one_hot_vector
-
-def read_json(filename):
-        f = open(filename, 'r')
-        jsonData = json.load(f,"utf-8")
-        text = json.dumps(jsonData)
-        f.close()
-        return text, jsonData
-
-def parse_text(text, tagger):
-	encode_text = text.encode('utf-8')
-        res = m.parse(encode_text)
-        return res.decode('utf-8')
-
-def vec(arr):
-	from sklearn.feature_extraction.text import CountVectorizer
-	vectorizer = CountVectorizer(min_df=1)
-	X = vectorizer.fit_transform(arr)
-	index = vectorizer.get_feature_names()
-	return X.toarray(), index
+import in_out
 
 def find_P(text, index_corpus, file, m):
 	#APの病名だけを抽出して分かち書きしてくれる関数
@@ -33,7 +14,7 @@ def find_P(text, index_corpus, file, m):
 		if int(word.find("#")) != -1:
 			fw.write(word)
 			fw.write(",")
-			tmp = one_hot_vector.parse_text(word, m)
+			tmp = in_out.parse_text(word, m)
 			P_list.append(tmp)
 			#病気名をベクトル化するかはまた別に考えよう
 	return tmp
@@ -113,7 +94,7 @@ def show_noun(pid):
 
 if __name__ == "__main__":
 	#p_text, p_json = read_json("output/one_json_time_series_patient.json")
-	p_text, p_json = read_json("output/json_multi_lab_time_series_patient.json")
+	p_text, p_json = in_out.read_json("output/json_multi_lab_time_series_patient.json")
 
 
         #Unidentified two spaces
@@ -166,7 +147,3 @@ if __name__ == "__main__":
 	#共起単語の発見
 	#similar_patients_idはcsvで開けて、index_corpusも開ける
 	
-	"""
-	p_id = 1
-	noun_box = show_noun(p_id)
-	"""

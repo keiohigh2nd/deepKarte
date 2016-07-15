@@ -3,28 +3,7 @@ import json, random, MeCab
 import detection, codecs
 import collections
 import numpy as np
-
-def read_json(filename):
-        f = open(filename, 'r')
-        jsonData = json.load(f,"utf-8")
-        text = json.dumps(jsonData)
-        f.close()
-        return text, jsonData
-
-def parse_text(text, tagger):
-	encode_text = text.encode('utf-8')
-        res = tagger.parse(encode_text)
-        return res.decode('utf-8')
-
-def vec(arr):
-	#vectorizer.transform(['Something completely new.']).toarray()
-	#入ってきたカルテをvector化する
-	from sklearn.feature_extraction.text import CountVectorizer
-	vectorizer = CountVectorizer(analyzer = 'char_wb', ngram_range=(0, 1))
-	#vectorizer = CountVectorizer(analyzer = 'word', ngram_range=(0, 1), token_pattern=u'(?u)\\b\\w+\\b', stop_words=["."] )
-	X = vectorizer.fit_transform(arr)
-	index = vectorizer.get_feature_names()
-	return X.toarray(), index
+import dictionarize, in_out
 
 def return_vector(arr_index, text):
 	return arr_index.index(text)
@@ -66,7 +45,7 @@ def create_data(nb_of_samples, sequence_len):
 	index = f.read().split(",")
 	f.close()
 	
-	p_text, p_json = read_json("output/one_json_time_series_patient.json")
+	p_text, p_json = in_out.read_json("output/one_json_time_series_patient.json")
 	sample_texts = p_json["2"]["0"]["A/P"]
 	samples = []
 	for i in xrange(nb_of_samples):
@@ -80,7 +59,7 @@ def create_data(nb_of_samples, sequence_len):
 if __name__ == "__main__":
         #count, index = load_sample()
 
-	p_text, p_json = read_json("output/one_json_time_series_patient.json")
+	p_text, p_json = in_out.read_json("output/one_json_time_series_patient.json")
 
         #Unidentified two spaces
         num_patients = len(p_json)
@@ -96,10 +75,10 @@ if __name__ == "__main__":
 		text = p_json["%s"%i]["0"]["A/P"]
 		fp.write(p_json["%s"%i]["0"]["patient_id"])
 		fp.write("\n")
-		tmp.append(parse_text(text, m))
+		tmp.append(in_out.parse_text(text, m))
 	fp.close()
 
-	vec_corpus, index_corpus = vec(tmp)
+	vec_corpus, index_corpus = dictionarize.vec(tmp)
 	
 	np.save('processed_data/AP_patient.npy', vec_corpus)
 	
@@ -118,7 +97,7 @@ if __name__ == "__main__":
 	#ここからはsampleだが,parseしなくても可
 	#Example
 	sample = p_json["2"]["0"]["A/P"]
-	parsed_sample = parse_text(text, m)
+	parsed_sample = in_out.parse_text(text, m)
 	#print ch_hot_vector(index_corpus, sample[1])
 
 	nb_of_samples = 4

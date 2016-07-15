@@ -6,9 +6,9 @@ def hasKanji(s):
    if (((ord(c)&0xff00) == 0x3000) or (0x4e00 <= ((ord(c)&0xff00) <=0x9f00))):
 	continue
    else:
-	print c
      	kanji.append(c)
+	print c
   return kanji
 
-if __name__ == "__main__":
-	pass
+s = u"あ"
+print hasKanji(s)

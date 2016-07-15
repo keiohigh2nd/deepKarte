@@ -35,9 +35,8 @@ def neighbor_matrix(arr_text, index_corpus):
 	
 
 if __name__ == "__main__":
-        #count, index = load_sample()
-
-	p_text, p_json = in_out.read_json("output/one_json_time_series_patient.json")
+	#このスクリプトはword_indexと近傍行列とPatient IDリストを作る
+	p_text, p_json = in_out.read_json("output/json_multi_lab_time_series_patient.json")
 
         #Unidentified two spaces
         num_patients = len(p_json)
@@ -66,7 +65,6 @@ if __name__ == "__main__":
 		f.write(",")
 	f.close()
 
-	#print return_vector(index_corpus, index_corpus[55])
 	#word neighbor MATRIX
 	w_range = 5 #ここの実装はまだ
 	sm_tensor = []

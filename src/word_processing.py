@@ -22,6 +22,8 @@ if __name__ == "__main__":
 			lab = "WBC"
                 	tmp_array.append(p_json["%s"%p]["%s"%t][lab])
                 	tmp_chr.append(process(p_json["%s"%p]["%s"%t]["A/P"]))
+			break
+		break
 	
 	print tmp_chr
 	count, index = vectorlize.dictionarize_text(tmp_chr)

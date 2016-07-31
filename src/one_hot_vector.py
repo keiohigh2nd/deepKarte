@@ -55,7 +55,9 @@ if __name__ == "__main__":
 		tmp.append(in_out.parse_text(text, m))
 	fp.close()
 
-	vec_corpus, index_corpus = dictionarize.vec_oneword(tmp)
+	#1文字ずつ分けて辞書作っている
+	vec_corpus, index_corpus = dictionarize.vec(tmp)
+	#vec_corpus, index_corpus = dictionarize.vec_oneword(tmp)
 	
 	np.save('processed_data/AP_patient.npy', vec_corpus)
 
@@ -74,4 +76,4 @@ if __name__ == "__main__":
 		mat = neighbor_matrix(arr_text, index_corpus)
 		sm_tensor.append(mat)
 	np.save('processed_data/Neighbor_mat.npy', sm_tensor)
-	tmp = np.load('processed_data/Neighbor_mat.npy')
+	#tmp = np.load('processed_data/Neighbor_mat.npy')

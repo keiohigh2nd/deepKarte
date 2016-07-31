@@ -43,7 +43,7 @@ class Example(QtGui.QMainWindow):
 
 	#病名とBoGを利用した共起表現の所
 	p_index = select_similar.return_patient_index(text)
-	extract_P.show_noun(p_index)
+	#extract_P.show_noun(p_index)
 	#self.statusBar().showMessage(similar_pid + ' is Similar')
 
 	self.lbl.move(10, 10)
@@ -56,7 +56,7 @@ class Example(QtGui.QMainWindow):
 
         #病名とBoGを利用した共起表現の所
         p_index = select_similar.return_patient_index(text)
-        extract_P.show_noun(p_index)
+        #extract_P.show_noun(p_index)
 
         self.lbl.move(100, 10)
         self.lbl.setText('<a href="file:///Users/keiohigh2nd/deepKarte/view/done_sunburst.html">Similar Patients</a>')
@@ -65,14 +65,14 @@ class Example(QtGui.QMainWindow):
 
     def buttonClicked3(self, text):
         text, ok = QtGui.QInputDialog.getText(self, 'Input Dialog', 'Enter Patient Id')
+
         #病名とBoGを利用した共起表現の所
         p_index = select_similar.return_patient_index(text)
-        extract_P.show_noun(p_index)
+        #extract_P.show_noun(p_index)
 
         self.lbl.move(180, 10)
         self.lbl.setText('<a href="file:///Users/keiohigh2nd/deepKarte/view/done_parallelCoordinates.html">Patients Course</a>')
         self.lbl.setOpenExternalLinks(True)
-
 
 def main():
     

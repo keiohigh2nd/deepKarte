@@ -17,9 +17,8 @@ def find_coexist_words(similar_patients_list):
 	#.
 	#.
 	#上からどんどんん[0,0,1...]というのに[0,0,1...]というのを足してる
-	N = 20
+	N = 100
 	max_N_list = []
-	print arr
 	for i in xrange(N):
 		tmp = np.argmax(arr)
 		max_N_list.append(tmp)
@@ -62,7 +61,7 @@ if __name__ == "__main__":
 	#病名が類似している類似患者は先に割り出しておく
 	#共起単語の発見
 	#similar_patients_idはcsvで開けて、index_corpusも開ける
-	tmp = show_noun(1)	
+	tmp = show_noun(2)	
 	for t in tmp:
 		print t.encode('utf-8')
 

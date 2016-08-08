@@ -9,6 +9,7 @@ view/*
 !sunburst.html
 !cumulativeLineChart*
 !bulk_data.py
+!outcome_evaluation.html
 dic_output
 .DS_Store
 .git

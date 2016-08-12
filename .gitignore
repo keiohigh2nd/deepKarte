@@ -10,6 +10,8 @@ view/*
 !cumulativeLineChart*
 !bulk_data.py
 !outcome_evaluation.html
+!find_similar_patient.html
+!find_treatment_effect.html
 dic_output
 .DS_Store
 .git

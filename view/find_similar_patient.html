@@ -1,0 +1,48 @@
+ <script language="javascript" type="text/javascript">
+ <!--
+ function Display(no){
+     if(no == "no1"){
+         document.getElementById("SW1").style.display = "block";
+         document.getElementById("SW2").style.display = "none";
+         document.getElementById("SW3").style.display = "none";
+     }else if(no == "no2"){
+         document.getElementById("SW1").style.display = "none";
+         document.getElementById("SW2").style.display = "block";
+         document.getElementById("SW3").style.display = "none";
+     }else if(no == "no3"){
+         document.getElementById("SW1").style.display = "none";
+         document.getElementById("SW2").style.display = "none";
+         document.getElementById("SW3").style.display = "block";
+     }
+ }
+function screenChange(){
+    pullSellect = document.pullForm.pullMenu.selectedIndex ;
+    location.href = document.pullForm.pullMenu.options[pullSellect].value ;
+}
+
+ -->
+ </script>
+<form name="pullForm">
+    <select name="pullMenu" onChange="screenChange()">
+        <option value="done_ATE_cumulativeLineChart.html">介入A</option>
+        <option value="done_parallelCoordinates.html">介入B</option>
+        <option value="done_sunburst.html">介入C</option>
+    </select>
+</form>
+  
+ <h5><a href="javascript:;" onclick="Display('no1')">SW1</a></h5>
+ <h5><a href="javascript:;" onclick="Display('no2')">SW2</a></h5>
+ <h5><a href="javascript:;" onclick="Display('no3')">SW3</a></h5>
+  
+ <div id="SW1">
+ <iframe width="560" height="315" src="done_ATE_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
+ </div>
+  
+ <div id="SW2" style="display:none;">
+        <iframe width="560" height="315" src="done_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
+ </div>
+
+<div id="SW3" style="display:none;">
+        <iframe width="560" height="315" src="done_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
+ </div>
+

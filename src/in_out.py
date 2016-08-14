@@ -14,4 +14,6 @@ def parse_text(text, m):
         return res.decode('utf-8')
 
 
+def return_vector(arr_index, text):
+        return arr_index.index(text)
 

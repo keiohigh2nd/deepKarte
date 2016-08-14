@@ -1,40 +1,10 @@
 # -*- coding: utf-8 -*-
-import json, random, MeCab
-import detection, codecs
-import collections
+import json, random, MeCab, collections, codecs
 import numpy as np
-import dictionarize, in_out
-
-def return_vector(arr_index, text):
-	return arr_index.index(text)
-
-def neighbor_matrix(arr_text, index_corpus):
-	s_matrix = np.zeros((len(index_corpus), len(index_corpus)))	
-	arr_text = arr_text.split(" ")
-	del arr_text[-1]
-	del arr_text[0]
-	for t in xrange(len(arr_text)):	
-		try:
-			i = index_corpus.index(arr_text[t])
-			if t > 0:
-				m_1 = index_corpus.index(arr_text[t-1])
-                       		s_matrix[i][m_1] += 1
-                	if t < len(arr_text)-1:
-                        	m1 = index_corpus.index(arr_text[t+1])
-                        	s_matrix[i][m1] += 1
-			if t > 1:
-                                m_2 = index_corpus.index(arr_text[t-2])
-                                s_matrix[i][m_2] += 1
-                        if t < len(arr_text)-2:
-                                m1 = index_corpus.index(arr_text[t+2])
-                                s_matrix[i][m2] += 1
-		except:
-			pass
-	return s_matrix
-		
+import dictionarize, in_out, detection
 	
 def ch_hot_vector(index, ch):
-        tmp_id = return_vector(index, ch)
+        tmp_id = in_out.return_vector(index, ch)
         size = len(index)
         tmp_vec = np.zeros((size))
         tmp_vec[tmp_id]  = 1
@@ -51,7 +21,7 @@ def create_data(nb_of_samples, sequence_len):
 	for i in xrange(nb_of_samples):
 		tmp = np.zeros(len(index))
 		for j in xrange(sequence_len):
-			tmp[return_vector(index, sample_texts[i+j])] = 1
+			tmp[in_out.return_vector(index, sample_texts[i+j])] = 1
 		samples.append(tmp)
 	return samples
 

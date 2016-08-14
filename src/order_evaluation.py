@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-import json, random
-import detection
-import collections
+import json, random, collections
+import detection, dictionarize, in_out
 import numpy as np
-import in_out
 
 def get_index(word, index):
         i = 0
@@ -11,15 +9,6 @@ def get_index(word, index):
           if w == word:
             return i
           i += 1
-
-def dictionarize_text(arr):
-	#Need preprocessing of texts
-        cl = collections.Counter(arr)
-	from sklearn.feature_extraction import DictVectorizer
-	v = DictVectorizer()
-	count = v.fit_transform(cl)
-        index = v.get_feature_names()
-        return count, index
 
 def get_cov(text, index):
 	s_matrix = np.zeros((len(index), len(index)))
@@ -118,7 +107,7 @@ if __name__ == "__main__":
 	for t in xrange(num_patients):
         	texts = p_json["%s"%t]["0"]["A/P"].split(" ")
         	order_label = texts.index(topic)
-		#count_m, index = dictionarize_text(texts)
+		#count_m, index = dictionarize.vec(texts)
 		#Generate Matrix
 		sm = get_cov(texts, index)
 		sm_patients.append(sm)

@@ -3,36 +3,8 @@ import json, random, MeCab
 import detection, codecs
 import collections
 import numpy as np
-import dictionarize, in_out
+import dictionarize, in_out, neighbor_matrix
 
-def return_vector(arr_index, text):
-	return arr_index.index(text)
-
-def neighbor_matrix(arr_text, index_corpus):
-	s_matrix = np.zeros((len(index_corpus), len(index_corpus)))	
-	arr_text = arr_text.split(" ")
-	del arr_text[-1]
-	del arr_text[0]
-	for t in xrange(len(arr_text)):	
-		try:
-			i = index_corpus.index(arr_text[t])
-			if t > 0:
-				m_1 = index_corpus.index(arr_text[t-1])
-                       		s_matrix[i][m_1] += 1
-                	if t < len(arr_text)-1:
-                        	m1 = index_corpus.index(arr_text[t+1])
-                        	s_matrix[i][m1] += 1
-			if t > 1:
-                                m_2 = index_corpus.index(arr_text[t-2])
-                                s_matrix[i][m_2] += 1
-                        if t < len(arr_text)-2:
-                                m1 = index_corpus.index(arr_text[t+2])
-                                s_matrix[i][m2] += 1
-		except:
-			pass
-	return s_matrix
-		
-	
 
 if __name__ == "__main__":
 	#このスクリプトはword_indexと近傍行列とPatient IDリストを作る
@@ -73,7 +45,7 @@ if __name__ == "__main__":
 	for i in xrange(num_patients):
 		text = p_json["%s"%i]["0"]["A/P"]
 		arr_text = in_out.parse_text(text, m)
-		mat = neighbor_matrix(arr_text, index_corpus)
+		mat = neighbor_matrix.neighbor_matrix(arr_text, index_corpus)
 		sm_tensor.append(mat)
 	np.save('processed_data/Neighbor_mat.npy', sm_tensor)
 	#tmp = np.load('processed_data/Neighbor_mat.npy')

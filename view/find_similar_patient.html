@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/find_similar_patient.css"  />
  <script language="javascript" type="text/javascript">
  <!--
  function Display(no){
@@ -22,18 +23,20 @@ function screenChange(){
 
  -->
  </script>
+
+<h1>Finding Similar Patients</h1>
+
 <form name="pullForm">
     <select name="pullMenu" onChange="screenChange()">
-        <option value="done_ATE_cumulativeLineChart.html">介入A</option>
-        <option value="done_parallelCoordinates.html">介入B</option>
-        <option value="done_sunburst.html">介入C</option>
+        <option value="ATE.html">介入</option>
+        <option value="ATE.html">介入</option>
     </select>
 </form>
-  
- <h5><a href="javascript:;" onclick="Display('no1')">SW1</a></h5>
- <h5><a href="javascript:;" onclick="Display('no2')">SW2</a></h5>
- <h5><a href="javascript:;" onclick="Display('no3')">SW3</a></h5>
-  
+ <div id="outcome"> 
+ <a href="javascript:;" onclick="Display('no1')">SW1</a>
+ <a href="javascript:;" onclick="Display('no2')">SW2</a>
+ <a href="javascript:;" onclick="Display('no3')">SW3</a>
+ </div> 
  <div id="SW1">
  <iframe width="560" height="315" src="done_ATE_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
  </div>
@@ -44,5 +47,5 @@ function screenChange(){
 
 <div id="SW3" style="display:none;">
         <iframe width="560" height="315" src="done_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
- </div>
+</div>
 

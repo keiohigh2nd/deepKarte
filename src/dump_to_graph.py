@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
-import json_time_series_generate_patients
 import json
-import detection
-
-def read_json():
-	f = open('tmp/json_time_series_patient.json', 'r')
-	jsonData = json.load(f,"utf-8")
-	text = json.dumps(jsonData)
-	f.close()
-	return text, jsonData
+import detection, in_out, json_time_series_generate_patients
 
 def maker_json(base, t_base, sec_base, t_sec_base):
 	marker = [{
@@ -63,7 +55,7 @@ def convert_to_json(MD, Tri, Chief):
 	return p_dict
 
 if __name__ == "__main__":
-	p_text, p_json  = read_json()
+	p_text, p_json  = in_out.read_json()
 	tokens, text = detection.text_to_tokens(p_text)
 	tmp = detection.word_count(tokens)
 

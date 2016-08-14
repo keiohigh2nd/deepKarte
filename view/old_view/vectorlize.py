@@ -2,6 +2,7 @@ import json, random
 import detection
 import collections
 import numpy as np
+import dictionarize
 
 def read_json(filename):
         f = open(filename, 'r')
@@ -32,9 +33,8 @@ if __name__ == "__main__":
 
         #Unidentified two spaces
         texts = p_json["0"]["3"]["Plan"].split("  ")
-	print texts
-	count_m, index = dictionarize_text(texts)
 
-	sm = get_cov(texts, index)
-	print sm
+	count_m, index = dictionarize.vec(texts)
+	print index
+
 

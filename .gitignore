@@ -2,8 +2,6 @@ sample/
 tmp/
 *.pyc
 view/*
-!index.html
-!tree.html
 !app.js
 !parallelCoordinatesChart*
 !sunburst.html
@@ -12,6 +10,10 @@ view/*
 !outcome_evaluation.html
 !find_similar_patient.html
 !find_treatment_effect.html
+!ATE.html
+!js
+!css
+
 dic_output
 .DS_Store
 .git

@@ -60,40 +60,28 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-dropdownhover.js"></script>
 
-<h1>類似患者検索~結果~</h1>
+<h1>治療効果</h1>
 
- <div id="outcome"> 
-   <a href="javascript:;" onclick="Display('no1')">CRP</a>
-   <a href="javascript:;" onclick="Display('no2')">血糖値</a>
-   <a href="javascript:;" onclick="Display('no3')">退院日</a>
+
+<div id="outcome">
+   <a href="javascript:;" onclick="Display('no1')">降圧薬</a>
+   <a href="javascript:;" onclick="Display('no2')">血糖降下薬</a>
+   <a href="javascript:;" onclick="Display('no3')">コレステロール</a>
  </div>
 
-<div id="res_window"> 
+<div id="res_window">
    <div id="SW1">
-     <iframe width="750" height="315" src="done_ATE_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
+     <iframe width="560" height="315" src="done_ATE_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
    </div>
-  
+
    <div id="SW2" style="display:none;">
-        <iframe width="750" height="315" src="done_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="done_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
    </div>
 
   <div id="SW3" style="display:none;">
-        <iframe width="750" height="315" src="done_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="done_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
   </div>
 </div>
-
-  <div id="events" >
-	<h3>イベント集計</h3>
-        <iframe width="750" height="315" src="done_sunburst.html" frameborder="0" allowfullscreen></iframe>
-  </div>
-
-  <div id="population">
-	<h3>集団分布</h3>
-        <iframe width="750" height="315" src="done_parallelCoordinates.html" frameborder="0" allowfullscreen></iframe>
-  </div>
-
-
-
 
 
 </html>

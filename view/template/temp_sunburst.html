@@ -30,7 +30,7 @@
         chart.color(d3.scale.category20c());
 
         d3.select("#test1")
-                .datum(getData())
+                .datum(InputData())
                 .call(chart);
 
         nv.utils.windowResize(chart.update);
@@ -38,7 +38,8 @@
         return chart;
     });
 
-    function getData() {
+    function InputData() {
+	return [ {{json}} ];
     }
 
 </script>

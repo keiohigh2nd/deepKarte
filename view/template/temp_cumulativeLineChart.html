@@ -50,11 +50,11 @@
 
         chart.yAxis
 	     //.tickFormat(d3.format(',.1%'))
-	     .axisLabel({{label}})
+	     .axisLabel("{{label}}")
 	;
 
         d3.select('#chart1 svg')
-            .datum(cumulativeTestData())
+            .datum(InputData())
             .call(chart);
 
         //TODO: Figure out a good way to do this automatically
@@ -79,7 +79,8 @@
         }];
     }
 
-    function cumulativeTestData() {
+    function InputData() { 
+	return [ {{json}} ];
     }
 
 </script>

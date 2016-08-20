@@ -34,13 +34,13 @@ var chart;
 nv.addGraph(function() {
 
     chart = nv.models.parallelCoordinates()
-        .dimensionNames([{{label[0]}}, {{label[1]}}, {{label[2]}}, {{label[3]}}, {{label[4]}}, {{label[5]}}, {{label[6]}}])
+        .dimensionNames([ "{{label[0]}}", "{{label[1]}}", "{{label[2]}}", "{{label[3]}}", "{{label[4]}}", "{{label[5]}}", "{{label[6]}}" ])
         .dimensionFormats([d3.format(""), d3.format(""), d3.format("g"), d3.format("d"), d3.format(""), d3.format(""), d3.format("")])
         .lineTension(0.85);
 		
 
     d3.select('#chart1 svg')
-            .datum(data())
+            .datum(InputData())
             .call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -48,7 +48,8 @@ nv.addGraph(function() {
     return chart;
 });
 
-function data() {
+function InputData() {
+  return [ {{json}} ];
 }
 
 </script>

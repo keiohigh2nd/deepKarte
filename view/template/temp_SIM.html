@@ -36,7 +36,7 @@
             <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-animations="flipInX flipInY flipInX flipInY">Menu <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="ATE.html">介入</a></li>
-              <li><a href="find_similar_patient.html">類似患者検索</a></li>
+              <li><a href="#">類似患者検索</a></li>
               <li class="dropdown">
                 <a href="#">ベッド計算 <span class="caret"></span></a>
                 <ul class="dropdown-menu dropdownhover-right">
@@ -60,28 +60,40 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-dropdownhover.js"></script>
 
-<h1>治療効果</h1>
+<h1>類似患者検索~結果~</h1>
 
-
-<div id="outcome">
-   <a href="javascript:;" onclick="Display('no1')">降圧薬</a>
-   <a href="javascript:;" onclick="Display('no2')">血糖降下薬</a>
-   <a href="javascript:;" onclick="Display('no3')">コレステロール</a>
+ <div id="outcome"> 
+   <a href="javascript:;" onclick="Display('no1')">CRP</a>
+   <a href="javascript:;" onclick="Display('no2')">血糖値</a>
+   <a href="javascript:;" onclick="Display('no3')">退院日</a>
  </div>
 
-<div id="res_window">
+<div id="res_window"> 
    <div id="SW1">
-     <iframe width="560" height="315" src="done_ATE_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
+     <iframe width="750" height="315" src="o_CUM1.html" frameborder="0" allowfullscreen></iframe>
    </div>
-
+  
    <div id="SW2" style="display:none;">
-        <iframe width="560" height="315" src="done_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
+        <iframe width="750" height="315" src="o_CUM2.html" frameborder="0" allowfullscreen></iframe>
    </div>
 
   <div id="SW3" style="display:none;">
-        <iframe width="560" height="315" src="done_cumulativeLineChart.html" frameborder="0" allowfullscreen></iframe>
+        <iframe width="750" height="315" src="o_CUM2.html" frameborder="0" allowfullscreen></iframe>
   </div>
 </div>
+
+  <div id="events" >
+	<h3>イベント集計</h3>
+        <iframe width="750" height="315" src="o_SUN.html" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <div id="population">
+	<h3>集団分布</h3>
+        <iframe width="750" height="315" src="o_PAR.html" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+
+
 
 
 </html>

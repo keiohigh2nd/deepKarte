@@ -46,7 +46,7 @@ class Example(QtGui.QMainWindow):
 	#self.statusBar().showMessage(similar_pid + ' is Similar')
 
 	self.lbl.move(10, 10)
-        self.lbl.setText('<a href="file:///Users/keiohigh2nd/deepKarte/view/done_cumulativeLineChart.html">Patient Flow</a>')
+        self.lbl.setText('<a href="file:///Users/keiohigh2nd/deepKarte/view/find_similar_patient.html">Patient Flow</a>')
         self.lbl.setOpenExternalLinks(True)
 
 

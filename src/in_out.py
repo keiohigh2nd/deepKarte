@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+import numpy as np
 
 def read_json(filename):
         f = open(filename, 'r')

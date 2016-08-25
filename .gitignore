@@ -27,3 +27,4 @@ elastic_search/*
 processed_data
 flask/*
 templates
+Speech/data

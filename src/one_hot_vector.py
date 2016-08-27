@@ -5,7 +5,6 @@ import collections
 import numpy as np
 import dictionarize, in_out, neighbor_matrix
 
-
 if __name__ == "__main__":
 	#このスクリプトはword_indexと近傍行列とPatient IDリストを作る
 	p_text, p_json = in_out.read_json("output/json_multi_lab_time_series_patient.json")

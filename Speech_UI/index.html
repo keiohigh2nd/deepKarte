@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Support Karte</title>
+
+<script type="text/javascript">
+<!--
+var txt = "";
+
+function hidebox(){
+  document.getElementById("boxblock").style.display = "none";
+  var title = obj.getAttribute('title');
+}
+
+function showbox() {
+  document.getElementById("boxblock").style.display = "block";
+  storeTxt();
+
+}
+window.onload = function(){
+  showbox();
+};
+
+function storeTxt(txt) {
+  document.getElementById("text").innerHTML=txt;
+}
+
+//-->
+</script>
+
+</head>
+
+<body>
+
+-----
+<form id="f1" action="#">
+  <p>
+	<input type="button" value="ADD" onclick="showbox()"> 
+	<input type="button" value="Delete" onclick="hidebox()">
+  </p>
+  <div id="boxblock">
+    夕方になると胸が痛くなると
+  </div>
+</form>
+-----
+
+</body>
+</html>

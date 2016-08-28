@@ -28,3 +28,4 @@ processed_data
 flask/*
 templates
 Speech/data
+Speech_UI/o_*

@@ -5,26 +5,21 @@
 <title>Support Karte</title>
 
 <script type="text/javascript">
-<!--
-var txt = "";
+  <!--
 
-function hidebox(){
-  document.getElementById("boxblock").style.display = "none";
-  var title = obj.getAttribute('title');
-}
+  {% for i in contents %}
+    function hidebox_{{ i }}(){
+      document.getElementById("boxblock{{ i }}").style.display = "none";
+    }
 
-function showbox() {
-  document.getElementById("boxblock").style.display = "block";
-  storeTxt();
+    function showbox_{{ i }}() {
+      document.getElementById("boxblock{{ i }}").style.display = "block";
+    }    
+  {% endfor %}
 
-}
-window.onload = function(){
-  showbox();
-};
-
-function storeTxt(txt) {
-  document.getElementById("text").innerHTML=txt;
-}
+  window.onload = function(){
+    showbox();
+  };
 
 //-->
 </script>
@@ -33,15 +28,19 @@ function storeTxt(txt) {
 
 <body>
 
+
 -----
+
 <form id="f1" action="#">
-  <p>
-	<input type="button" value="ADD" onclick="showbox()"> 
-	<input type="button" value="Delete" onclick="hidebox()">
-  </p>
-  <div id="boxblock">
-    夕方になると胸が痛くなると
-  </div>
+     <p>
+     {% for i in contents %}
+	<input type="button" value="ADD" onclick="showbox_{{ i }}()"> 
+	<input type="button" value="Delete" onclick="hidebox_{{ i }}()">
+        <div id="boxblock{{ i }}">
+         夕方になると胸が痛くなると
+        </div>
+     {% endfor %}
+     </p>
 </form>
 -----
 

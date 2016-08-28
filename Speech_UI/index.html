@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<link href="css/index.css" rel="stylesheet" type="text/css">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Support Karte</title>
+<title>AlphaKarte</title>
 
 <script type="text/javascript">
   <!--
@@ -28,21 +29,44 @@
 
 <body>
 
+<div id="karte">
 
------
+  <h4>主訴</h4>
+    {{ prime }}
+  <h4>生活歴</h4>
+    {{ life }}
+  <h4>既往歴</h4>
+    {{ past }}
+  <h4>家族歴</h4>
+    {{ family }}
+  <h4>アレルギー</h4>
+    {{ alle }}
+  <h4>現在の処方</h4>
+    {{ pharm }}
 
-<form id="f1" action="#">
+  <h4>現病歴</h4>
+  <form id="f1" action="#">
      <p>
      {% for i in contents %}
-	<input type="button" value="ADD" onclick="showbox_{{ i }}()"> 
-	<input type="button" value="Delete" onclick="hidebox_{{ i }}()">
+     <table>
+      <tr>
+      <td>
+      <div id="texts">
         <div id="boxblock{{ i }}">
-         夕方になると胸が痛くなると
+           {{ history[i] }}
         </div>
+      </td>
+      <td>
+      <div id="control">
+	<input type="button" value="追加" onclick="showbox_{{ i }}()"> 
+	<input type="button" value="消去" onclick="hidebox_{{ i }}()">
+      </div>
+      </td>
+      </tr>
+     </table>
      {% endfor %}
      </p>
-</form>
------
-
+  </form>
+</div>
 </body>
 </html>

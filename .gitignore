@@ -29,3 +29,7 @@ flask/*
 templates
 Speech/data
 Speech_UI/o_*
+Speech_UI/css/*
+!index.css
+Speech_UI/js
+Speech_UI/fonts

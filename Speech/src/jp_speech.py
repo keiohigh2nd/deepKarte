@@ -83,9 +83,18 @@ def main(speech_file):
 
 # [START run_application]
 if __name__ == '__main__':
+    import os,sys
+    param = sys.argv
+    files = os.listdir(param[1])
+    for file in files:
+      file_path = param[1] + "/" + file
+      print file_path
+      main(file_path)
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument(
         'speech_file', help='Full path of audio file to be recognized')
     args = parser.parse_args()
     main(args.speech_file)
     # [END run_application]
+    """

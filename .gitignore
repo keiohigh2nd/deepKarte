@@ -28,6 +28,7 @@ processed_data
 flask/*
 templates
 Speech/data
+Speech/karte
 Speech_UI/o_*
 Speech_UI/css/*
 !index.css

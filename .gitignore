@@ -1,5 +1,6 @@
 sample/
 tmp/
+
 *.pyc
 view/*
 !app.js
@@ -25,10 +26,12 @@ output
 elastic_search/*
 !*mapping.json
 processed_data
+
 flask/learn
 flask/templates/build
 flask/templates/css
 flask/templates/js
+flask/templates/fonts
 
 Speech/data
 Speech/karte

@@ -15,17 +15,14 @@ if __name__ == "__main__":
 
   f = open(param[1], "r")
   data = json.load(f)
-  print data["others"]
   others = re.split(u'ああ', data["others"]) 
-
-
   
 
   num_history = np.arange(len(others)) #for文章を回すために必要
   env = Environment(loader=FileSystemLoader('./', encoding='utf8'), autoescape=guess_autoescape,extensions=['jinja2.ext.autoescape'])
   tmp = env.get_template('flask/templates/space_index.html')
   #html = tmp.render(contents=["1", "2", "3"], prime=prime.decode("utf-8"), life=life.decode("utf-8"))
-  html = tmp.render(contents=num_history, history=others, prime=data["symptom"], life=data["life"], alle=data["alle"], pharm=data["medication"], family=data["family"], past = data["history"] )
+  html = tmp.render(contents=num_history, history=data["others"], prime=data["symptom"], life=data["life"], alle=data["alle"], pharm=data["medication"], family=data["family"], past = data["history"] )
 
   f = codecs.open('flask/templates/oindex.html', 'w', 'utf-8')
   f.write(html)

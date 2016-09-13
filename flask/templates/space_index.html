@@ -1,15 +1,28 @@
-<title>jQuery Example</title>
+<title>deepVoice</title>
 <script type="text/javascript"
   src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript">
 
 </script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
   $(function() {
     var submit_form = function(e) {
       $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
-        a: $('input[name="a"]').val(),
-        b: $('input[name="b"]').val()
+        a: document.getElementById ('prime').value,
+        b: document.getElementById ('life').value,
+        c: document.getElementById ('past').value,
+        d: document.getElementById ('family').value,
+        e: document.getElementById ('alle').value,
+        f: document.getElementById ('pharm').value,
+        g: document.getElementById ('history').value
       }, function(data) {
         $('#result').text(data.result);
         $('input[name=a]').focus().select();
@@ -19,7 +32,7 @@
 
     $('a#calculate').bind('click', submit_form);
 
-    $('input[type=text]').bind('keydown', function(e) {
+    $('input[type=textarea]').bind('keydown', function(e) {
       if (e.keyCode == 13) {
         submit_form(e);
       }
@@ -29,9 +42,34 @@
   });
 </script>
 
-<h1>jQuery Example</h1>
-<p>
-  <input type="text" size="5" name="a" value="{{history[1]}}" > +
-  <input type="text" size="5" name="b" value="{{history[2]}}" > =
-  <span id="result">?</span>
-<p><a href=# id="calculate">calculate server side</a>
+<h1>Your Karte</h1>
+<div id="karte">
+  <h4>主訴</h4>
+    <textarea rows="20" cols="10" name="a" id="prime"> {{ prime }} </textarea>
+  <h4>生活歴</h4>
+    <textarea rows="20" cols="10" name="b" id="life"> {{ prime }} </textarea>
+    {{ life }}
+  <h4>既往歴</h4>
+    <textarea rows="20" cols="10" name="c" id="past"> {{ prime }} </textarea>
+    {{ past }}
+  <h4>家族歴</h4>
+    <textarea rows="20" cols="10" name="d" id="family"> {{ prime }} </textarea>
+    {{ family }}
+  <h4>アレルギー</h4>
+    <textarea rows="20" cols="10" name="e" id="alle"> {{ prime }} </textarea>
+    {{ alle }}
+  <h4>現在の処方</h4>
+    <textarea rows="20" cols="10" name="f" id="pharm"> {{ prime }} </textarea>
+    {{ pharm }}
+
+  <h4>現病歴</h4>
+ <div class="form-group">
+    <textarea rows="40" cols="150" name="g" id="history">
+          {{ history }}
+    </textarea>
+ </div>
+ <p><span id="result">?</span></p>
+
+ <div class="form-group">
+  <a href=# id="calculate" class="btn btn-link">Learning</a>
+ </div>

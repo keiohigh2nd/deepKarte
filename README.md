@@ -11,6 +11,10 @@ Generate medical records for evaluating patient similarity
 2. python flask/add_escape.py 
 3. python flask/app.py 
 
+##Text summarization  
+1. python text_summarization/convert_data.py Speech/data/ep6/scripts.txt flask/learn/32.txt  
+2. python text_summarization/generate_data.py --input_dir=text_summarization/train --data_path=text_summarization/binary_train/output
+
 ##PS  
 Generate medical records for evaluating patient similarity
 

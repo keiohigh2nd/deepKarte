@@ -40,3 +40,11 @@ Speech_UI/css/*
 !index.css
 Speech_UI/js
 Speech_UI/fonts
+
+text_summarization/log_root
+text_summarization/binary_train
+text_summarization/train
+text_summarization/test.h
+text_summarization/data
+text_summarization/textsum
+

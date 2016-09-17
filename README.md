@@ -14,6 +14,7 @@ Generate medical records for evaluating patient similarity
 ##Text summarization  
 #Data Conversion  
 python src/strip_n.py text_summarization/train/Formatted_Training_Data.tsv  
+(Sentences into each word)  
 python text_summarization/generate_data.py --input_dir=text_summarization/train --data_path=text_summarization/NE109  
 python text_summarization/check_data.py --data_path=text_summarization/NE109  
 (Raw data -> train -> Binary_train)
@@ -24,7 +25,8 @@ python src/mecab_word_count.py text_summarization/data/national_exam109.txt
 #Learning Start  
 1. python text_summarization/convert_data.py Speech/data/ep6/scripts.txt flask/learn/32.txt  
 2. python text_summarization/generate_data.py --input_dir=text_summarization/train --data_path=text_summarization/binary_train/output  
-(Second argument is directory)
+(Second argument is directory)  
+
 ##PS  
 Generate medical records for evaluating patient similarity
 

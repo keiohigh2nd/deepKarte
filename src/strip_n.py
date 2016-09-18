@@ -1,5 +1,9 @@
 import MeCab
 
+def process(arr):
+  arr = arr.strip("\n")
+  return str(arr)
+
 def run(filename):
   f = open(filename)
   texts = f.readlines()
@@ -12,10 +16,10 @@ def run(filename):
   for t in texts:
     line = t.strip("\r\n").split("\t")
     l0 = tagger.parse(line[0])
-    f.write(l0)
+    f.write(process(l0))
     f.write("\t")
     l1 = tagger.parse(line[1])
-    f.write(l1)
+    f.write(process(l1))
     f.write("\n")
   f.close()
 

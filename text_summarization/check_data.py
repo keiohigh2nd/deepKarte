@@ -51,6 +51,7 @@ def ExampleGen(recordio_path, crc=0, num_epochs=None):
         example_str = struct.unpack('%ds' % str_len, reader.read(str_len))[0]
         skip_bytes = reader.read(crc) # skip crc bytes
         print example_str
+        print crc
         yield example_pb2.Example.FromString(example_str)
     epoch += 1
 

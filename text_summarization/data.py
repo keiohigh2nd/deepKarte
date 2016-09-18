@@ -93,9 +93,11 @@ def ExampleGen(recordio_path, num_epochs=None):
       reader = open(f, 'rb')
       while True:
         len_bytes = reader.read(8)
+        skip_bytes = reader.read(4)
         if not len_bytes: break
         str_len = struct.unpack('q', len_bytes)[0]
         example_str = struct.unpack('%ds' % str_len, reader.read(str_len))[0]
+        skip_bytes = reader.read(4)
         yield example_pb2.Example.FromString(example_str)
 
     epoch += 1

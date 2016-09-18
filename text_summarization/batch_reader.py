@@ -131,6 +131,7 @@ class Batcher(object):
     end_id = self._vocab.WordToId(data.SENTENCE_END)
     pad_id = self._vocab.WordToId(data.PAD_TOKEN)
     input_gen = self._TextGenerator(data.ExampleGen(self._data_path))
+    print input_gen.next()
     while True:
       (article, abstract) = input_gen.next()
       article_sentences = [sent.strip() for sent in

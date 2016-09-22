@@ -4,7 +4,29 @@ import numpy as np
 SQRT_CONST = 1e-3
 
 class cfr_net:
+    """
+    cfr_net implements the counterfactual regression neural network
+    by F. Johansson, U. Shalit and D. Sontag: https://arxiv.org/abs/1606.03976
+
+    This file contains the class cfr_net as well as helper functions.
+    The network is implemented as a tensorflow graph. The class constructor
+    creates an object containing relevant TF nodes as member variables.
+    """
+
     def __init__(self, x, t, y_ , p, FLAGS, r_alpha, r_lambda, do_in, do_out, dims):
+        """
+        Constructs a TensorFlow subgraph for counterfactual regression.
+        Sets the following member variables (to TF nodes):
+
+        self.output         The output prediction "y"
+        self.tot_loss       The total objective to minimize
+        self.imb_loss       The imbalance term of the objective
+        self.pred_loss      The prediction term of the objective
+        self.weights_in     The input/representation layer weights
+        self.weights_out    The output/post-representation layer weights
+        self.weights_pred   The (linear) prediction layer weights
+        self.h_rep          The layer of the penalized representation
+        """
 
         dim_input = dims[0]
         dim_in = dims[1]

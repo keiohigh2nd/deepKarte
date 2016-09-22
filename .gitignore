@@ -14,7 +14,7 @@ view/*
 !ATE.html
 !js
 !css
-!app.py
+!*.py
 !template/
 
 dic_output
@@ -51,4 +51,4 @@ text_summarization/Natinal_Exam
 text_summarization/Raw_data
 text_summarization/NE109
 
-
+textsum

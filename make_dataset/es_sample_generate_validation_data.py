@@ -49,13 +49,13 @@ def devide_dictionary(words, div_n):
 
 random.seed(2014)
 
-AP_words = read_file('sample_karte/qb_karte.txt')
-A_words = read_file('sample_karte/problem_list.txt')
-P_words = read_file('sample_karte/Action_list.txt')
+AP_words = read_file('make_dataset/sample_karte/qb_karte.txt')
+A_words = read_file('make_dataset/sample_karte/problem_list.txt')
+P_words = read_file('make_dataset/sample_karte/Action_list.txt')
 
-History_words = read_file('sample_karte/History.txt')
-O_words = read_file('sample_karte/O.txt')
-S_words = read_file('sample_karte/S.txt')
+History_words = read_file('make_dataset/sample_karte/History.txt')
+O_words = read_file('make_dataset/sample_karte/O.txt')
+S_words = read_file('make_dataset/sample_karte/S.txt')
 
 
 AP_words = AP_words.split("\n")

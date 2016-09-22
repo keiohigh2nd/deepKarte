@@ -1,0 +1,41 @@
+Traceback (most recent call last):
+  File "cfr_train_simple.py", line 245, in main
+    train(outdir)
+  File "cfr_train_simple.py", line 153, in train
+    alpha_:FLAGS.p_alpha, lambda_:FLAGS.p_lambda, p:p_treated})
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 382, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 655, in _run
+    feed_dict_string, options, run_metadata)
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 723, in _do_run
+    target_list, options, run_metadata)
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 743, in _do_call
+    raise type(e)(node_def, op, message)
+InvalidArgumentError: Expected begin[0] == 0 (got 0) and size[0] == 0 (got 1) when input.dim_size(0) == 0
+	 [[Node: Slice_4 = Slice[Index=DT_INT32, T=DT_FLOAT, _device="/job:localhost/replica:0/task:0/cpu:0"](Sqrt_1, Slice_4/begin, Slice_4/size)]]
+Caused by op u'Slice_4', defined at:
+  File "cfr_train_simple.py", line 252, in <module>
+    tf.app.run()
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/platform/app.py", line 30, in run
+    sys.exit(main(sys.argv))
+  File "cfr_train_simple.py", line 245, in main
+    train(outdir)
+  File "cfr_train_simple.py", line 95, in train
+    CFR = cfr.cfr_net(x_, t_, y_, p, FLAGS, alpha_, lambda_, do_in, do_out, dims)
+  File "/Users/keiohigh2nd/Downloads/cfrnet-master/cfr_net.py", line 126, in __init__
+    imb_error = r_alpha * wasserstein(h_rep,t,p,lam=FLAGS.wass_lambda,its=FLAGS.wass_iterations,sq=False,backpropT=FLAGS.wass_bpt)
+  File "/Users/keiohigh2nd/Downloads/cfrnet-master/cfr_net.py", line 259, in wasserstein
+    row = delta*tf.ones(tf.shape(M[0:1,:]))
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/ops/array_ops.py", line 338, in _SliceHelper
+    sliced = slice(tensor, indices, sizes)
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/ops/array_ops.py", line 388, in slice
+    return gen_array_ops._slice(input_, begin, size, name=name)
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/ops/gen_array_ops.py", line 2001, in _slice
+    name=name)
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/framework/op_def_library.py", line 703, in apply_op
+    op_def=op_def)
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/framework/ops.py", line 2310, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "/usr/local/lib/python2.7/site-packages/tensorflow/python/framework/ops.py", line 1232, in __init__
+    self._traceback = _extract_stack()
+

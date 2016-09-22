@@ -37,7 +37,9 @@ Generate medical records for evaluating patient similarity
 
 ##For View  
 
-ex)  python view/bulk_data_for_parallelcordinates.py output/d_lab.json view/space_parallelCoordinates.html view/done_parallelCoordinates.html   
+ex)  
+1. python view/bulk_data_for_parallelcordinates.py output/d_lab.json view/space_parallelCoordinates.html view/done_parallelCoordinates.html   
+2. python view/bulk_data_for_chart.py view/tchart.json view/space_cumulativeLineChart.html view/done_cumulativeLineChart.html  
 
 
 #Simple Patient History View  

@@ -266,14 +266,24 @@ class Seq2SeqAttentionModel(object):
     results = sess.run([self._enc_top_states, self._dec_in_state],
                        feed_dict={self._articles: enc_inputs,
                                   self._article_lens: enc_len})
-    return results[0], results[1][0]
+    return results[0], (results[1][0][0], results[1][1][0])
+    #return results[0], results[1][0]
 
   def decode_topk(self, sess, latest_tokens, enc_top_states, dec_init_states):
     """Return the topK results and new decoder states."""
+    tmpA = np.squeeze(np.array([x[0] for x in dec_init_states]))
+    tmpB =  np.squeeze(np.array([x[1] for x in dec_init_states]))
+    tmpC = np.reshape(tmpA, (1, 128))
+    tmpD = np.reshape(tmpB, (1, 128))
+
     feed = {
         self._enc_top_states: enc_top_states,
-        self._dec_in_state:
-            np.squeeze(np.array(dec_init_states)),
+        #self._dec_in_state:
+            #np.squeeze(np.array(dec_init_states)),
+	self._dec_in_state.c:
+ 	    tmpC,
+        self._dec_in_state.h:
+	    tmpD,
         self._abstracts:
             np.transpose(np.array([latest_tokens])),
         self._abstract_lens: np.ones([len(dec_init_states)], np.int32)}
@@ -284,6 +294,7 @@ class Seq2SeqAttentionModel(object):
 
     ids, probs, states = results[0], results[1], results[2]
     new_states = [s for s in states]
+    new_states = zip(*new_states)
     return ids, probs, new_states
 
   def build_graph(self):

@@ -1,0 +1,17 @@
+Training with hyperparameters: alpha=1.00e-02, lambda=1.00e-03
+Loading data for dimensions... data/ihdp_sample.csv
+Loaded data with shape [747,25]
+Starting session...
+Defining graph...
+Training...
+Objective Factual CFactual Imbalance
+[14.736223, 3.8385625, 6.0309329, 0.001660679]
+0	Obj: 14.65,	F: 3.827,	Cf: 6.018,	Imb: 0.001661
+200	Obj: 1.11,	F: 1.017,	Cf: 1.162,	Imb: 0.06655
+400	Obj: 1.019,	F: 0.9668,	Cf: 1.234,	Imb: 0.07122
+600	Obj: 0.9716,	F: 0.9478,	Cf: 1.206,	Imb: 0.05773
+800	Obj: 0.8893,	F: 0.8976,	Cf: 1.375,	Imb: 0.06523
+1000	Obj: 0.8005,	F: 0.8536,	Cf: 1.268,	Imb: 0.0518
+1200	Obj: 0.7964,	F: 0.8523,	Cf: 1.285,	Imb: 0.04842
+1400	Obj: 0.7994,	F: 0.8499,	Cf: 1.513,	Imb: 0.05411
+1600	Obj: 0.6793,	F: 0.7794,	Cf: 1.445,	Imb: 0.04827

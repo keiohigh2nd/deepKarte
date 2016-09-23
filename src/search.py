@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from collections import Counter
-import in_out, re, json 
+import in_out, re, json, codecs 
 
 def get_common_words(arr, N, p_json):
         p_text, p_json = in_out.read_json("output/json_multi_lab_time_series_patient.json")
@@ -20,14 +20,24 @@ def get_common_words(arr, N, p_json):
 			if re.match(ur"^[ぁ-んーァ-ンー\u4e00-\u9FFF]+$", word) != None and len(word) != 1:
         			counter[word] += 1
 
+         
 	#Word2vecで近い言葉
 	topk = 10
 	i = 0
+        words = []
 	for word, cnt in counter.most_common():
 		if i > topk:
 			break
-		print word
-		
+		words.append(word)
+        print len(words) 
+	from jinja2 import Environment, FileSystemLoader
+	env = Environment(loader=FileSystemLoader('./', encoding='utf8'))
+	tpl = env.get_template('view/space_sunburst.json')
+	html = tpl.render(words=words)
+	f = codecs.open('view/tsunburst.json', 'w', 'utf-8')
+  	f.write(html)
+  	f.close()	
+
 
 def get_parallel_value(arr, N, p_json):
         time = len(p_json["%s"%str(0)])
@@ -45,7 +55,6 @@ def get_parallel_value(arr, N, p_json):
 
 def get_time_value(arr, N, p_json):
 	time = len(p_json["%s"%str(0)])
-	f = open("processed_data/cumu.json", "w")
 
 	dic = []
 	time_series_data = []
@@ -85,16 +94,15 @@ def get_counterfatctual(arr, N, p_json, treatment, pmat):
 				target_p.append(i)
 				break
 		i += 1
-	print target_p
 
 	#Start Training
 	y_ = []
 	for i in xrange(num_patient):
-		y.append(p_json["%s"%str(i)]["1"]["WBC"])
+		y_.append(p_json["%s"%str(i)]["1"]["WBC"])
 
 	t_ = np.zeros(num_patient)
 	for t in target_p:
-		np.zeros[t] = 1
+		t_[t] = 1
 	
 	x_ = pmat	
 	#feed to NN
@@ -112,8 +120,12 @@ def convert_to_vec(filename):
         for line in lines:
             tmp = line[7:].strip("\n").split(" ")
             for word in tmp:
-               id = word_index.index(word)
-               arr[id] = 1
+	        try:       
+                    id = word_index.index(word)
+                    arr[id] = 1
+		except:
+		    print "No Index"
+		    arr[0] = 1
         return arr
 
 def find_similar_patient_bycontent(arr, N):
@@ -132,11 +144,15 @@ def find_similar_patient_bycontent(arr, N):
         
 	p_text, p_json = in_out.read_json("output/json_multi_lab_time_series_patient.json")
         #Output Search Result
-        #print get_time_value(it, N, p_json)
-        #print get_common_words(it, N, p_json)
-        #print get_parallel_value(it, N, p_json)
-        treatment = "免疫"
-	print get_counterfatctual(arr, N, p_json, treatment, pmat)
+        #get_time_value(it, N, p_json)
+        get_common_words(it, N, p_json)
+        #get_parallel_value(it, N, p_json)
+        #treatment = "免疫"
+	#print get_counterfatctual(arr, N, p_json, treatment, pmat)
+
+def run(filename):
+	sample_arr = convert_to_vec(filename)
+        find_similar_patient_bycontent(sample_arr, 10)
 
 if __name__ == "__main__":
 	#ここがsearch queryのtext

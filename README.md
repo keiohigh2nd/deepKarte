@@ -18,7 +18,7 @@ Generate medical records for evaluating patient similarity
 2. python text_summarization/generate_data.py --input_dir=text_summarization/train --data_path=text_summarization/binary_train/NE109  
 3. python text_summarization/check_data.py --data_path=text_summarization/binary_train/NE109 --crc=4  
 (Raw data -> train -> Binary_train)
-
+(If you want to convert google drive word file, first you convert it to Excel and A&B to TSV and then start from 1.)  
 ###Generate Vocab dictionary  
 python src/mecab_word_count.py text_summarization/data/national_exam109.txt  
 

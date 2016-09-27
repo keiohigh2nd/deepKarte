@@ -21,12 +21,15 @@ if __name__ == "__main__":
     if len(argvs) < 1:
        print "You need decoder directory"
 
+    filename = "textsum/log_root/decode"
+
     driver = webdriver.Chrome("shellscript/chromedriver")
     #driver.get('file:///Users/keiohigh2nd/deepKarte/view/ATE.html')
     driver.get("file:///Users/keiohigh2nd/deepKarte/view/find_similar_patient.html")
 
-    while True: 
-         updated_file = sorted_ls(argvs[1])
+
+    while True:
+         updated_file = sorted_ls(filename)
          search.run(updated_file)  
          generate_view()
          time.sleep(5) # Let the user actually see something!

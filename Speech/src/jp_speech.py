@@ -76,7 +76,7 @@ def main(speech_file):
     print(json.dumps(response))
     text = json.dumps(response, ensure_ascii=False)
     tmp = speech_file.split("/")[-1]
-    with open("Speech/data/%s.json"%tmp, "w") as fh:
+    with open("Speech/data/ep_text/%s.json"%tmp, "w") as fh:
       fh.write(text.encode("utf-8"))
     #json.dump(response, f, ensure_ascii=False) 
     # [END send_request]

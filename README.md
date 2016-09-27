@@ -27,6 +27,12 @@ python src/mecab_word_count.py text_summarization/data/national_exam109.txt
 2. python text_summarization/generate_data.py --input_dir=text_summarization/train --data_path=text_summarization/binary_train/output  
 (Second argument is directory)  
 
+
+#Recording and Learning
+sh shellscript/record.sh
+python shellscript/main.py
+python flask/app.py
+
 ##PS  
 Generate medical records for evaluating patient similarity
 

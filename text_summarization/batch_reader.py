@@ -154,16 +154,18 @@ class Batcher(object):
       # Filter out too-short input
       if (len(enc_inputs) < self._hps.min_input_len or
           len(dec_inputs) < self._hps.min_input_len):
-        tf.logging.warning('Drop an example - too short.\nenc:%d\ndec:%d',
-                           len(enc_inputs), len(dec_inputs))
+        tf.logging.warning('')
+        #tf.logging.warning('Drop an example - too short.\nenc:%d\ndec:%d',
+                           #len(enc_inputs), len(dec_inputs))
         continue
 
       # If we're not truncating input, throw out too-long input
       if not self._truncate_input:
         if (len(enc_inputs) > self._hps.enc_timesteps or
             len(dec_inputs) > self._hps.dec_timesteps):
-          tf.logging.warning('Drop an example - too long.\nenc:%d\ndec:%d',
-                             len(enc_inputs), len(dec_inputs))
+          tf.logging.warning('')
+          #tf.logging.warning('Drop an example - too long.\nenc:%d\ndec:%d',
+                             #len(enc_inputs), len(dec_inputs))
           continue
       # If we are truncating input, do so if necessary
       else:

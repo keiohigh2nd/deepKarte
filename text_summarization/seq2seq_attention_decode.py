@@ -26,8 +26,8 @@ FLAGS = tf.app.flags.FLAGS
 #tf.app.flags.DEFINE_integer('max_decode_steps', 1000000,
 tf.app.flags.DEFINE_integer('max_decode_steps', 2,
                             'Number of decoding steps.')
-#tf.app.flags.DEFINE_integer('decode_batches_per_ckpt', 1,
-tf.app.flags.DEFINE_integer('decode_batches_per_ckpt', 8000,
+tf.app.flags.DEFINE_integer('decode_batches_per_ckpt', 1,
+#tf.app.flags.DEFINE_integer('decode_batches_per_ckpt', 8000,
                             'Number of batches to decode before restoring next '
                             'checkpoint')
 

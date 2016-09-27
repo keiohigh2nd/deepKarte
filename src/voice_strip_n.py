@@ -12,10 +12,11 @@ def run(filename):
 
   tagger = MeCab.Tagger("-Owakati")
   tmp = filename.split("/")[-1]
-  f = open("text_summarization/train/NoQA_%s"%tmp, "w")
+  f = open("text_summarization/voice_train/%s"%tmp, "w")
   for t in texts:
-    line = t.strip("\r\n").split("\t")
-    print line
+    line = []
+    line.append(t)
+    line.append(t)
     l0 = tagger.parse(line[0])
     f.write(process(l0))
     f.write("\t")

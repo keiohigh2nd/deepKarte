@@ -53,5 +53,8 @@ text_summarization/NE109
 
 textsum
 
+voice_train
+voice_binary_train
+
 CI/results
 CI/data

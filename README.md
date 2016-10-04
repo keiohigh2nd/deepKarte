@@ -29,9 +29,9 @@ python src/mecab_word_count.py text_summarization/data/national_exam109.txt
 
 
 #Recording and Learning
-sh shellscript/record.sh
-python shellscript/main.py
-python flask/app.py
+sh shellscript/record.sh  
+python shellscript/main.py  
+python flask/app.py  
 
 ##PS  
 Generate medical records for evaluating patient similarity

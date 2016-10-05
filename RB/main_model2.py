@@ -35,57 +35,47 @@ def note(conversation):
 
     box = []
     im_box = []
+    ta_box = []
     while res:
     	tmp = res.feature.decode('utf-8').split(",")
-        print tmp[0], tmp[6]
         box.append(tmp[6])
         if tmp[0] == u'名詞':
 	    if find_in_dic(dic, tmp[6]) == 0:
 	        #box.append(tmp[6])
 	        im_box.append(tmp[6])
-        if tmp[0] == u'動詞' or tmp[0] == u'形容詞':
-            im_box.append(tmp[6])
-        if tmp[6].find(u"ない") != -1 or tmp[6].find(u"ん") != -1:
-	    im_box.append(tmp[6])
+        if tmp[6] == u'た':
+	    ta_box.append(tmp[6])
+
+        #if tmp[0] == u'動詞' or tmp[0] == u'形容詞':
+            #im_box.append(tmp[6])
+        #if tmp[6].find(u"ない") != -1 or tmp[6].find(u"ん") != -1:
+	    #im_box.append(tmp[6])
         res = res.next
 
-
     print conversation
-    print "------"
+
+    im_box = list(set(im_box))
+    print "-----------"
+    for i in im_box:
+        print i
+
+    memo = []
+    conversation = conversation.decode("utf-8")
     for i in xrange(len(im_box)):
-        print im_box[i]
+        start = conversation.find(im_box[i])
+        #start = conversation.find(im_box[i].encode("utf-8"))
+        for j in xrange(len(conversation)-start):
+                #print conversation.decode("utf-8")[1:10]
+                if j < 4:
+		    continue
+		if conversation[start+j] == u"た":
+             	    memo.append(conversation[start:start+j+1])  
+		    break
 
-    print "------"
-    dic_yes = []
-    dic_no = []
-    #文章単位で流すかどうかが問題
-    for i in xrange(len(box)):
-        print box[i]
-	#名刺以外はスキップ
-	if not box[i] in im_box:
-	    continue
-	for j in xrange(len(box)-i):
-	    #どこまで先を見に行くか
-            if j > 3:
-                break
-            if con(box[j+i]) == 0:
-                dic_no.append(box[i])
-	    else:
-		dic_yes.append(box[i])
-	   
 
-    dic_no = list(set(dic_no))
-    dic_yes = list(set(dic_yes))
-
-    print 'Negative Symptom'
-
-    for d in dic_no:
-	print d
-	dic_yes.remove(d)
-
-    print 'Positive Symptom'
-    for d in dic_yes:
-	print d
+    memo = list(set(memo))
+    for m in memo:
+        print m
 
 
 if __name__ == '__main__':

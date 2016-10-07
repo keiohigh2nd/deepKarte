@@ -74,14 +74,18 @@ def note(conversation):
 
 
     memo = list(set(memo))
+    f = open("RB/output/sum.txt", "w")
     for m in memo:
-        print m
-
+        if m:
+            f.write(m.encode("utf-8"))
+            f.write("\n")
+    f.close()
 
 if __name__ == '__main__':
-    f = open("Speech/data/ep_text/scripts.txt")
+    import sys
+    argvs = sys.argv
+    f = open(argvs[1])
     conversation = f.read()
     f.close()
 
-    se_conv =  split_conversation(conversation)
     note(conversation)
